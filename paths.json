@@ -1,0 +1,5 @@
+{
+  "lightcurve_directory": "/home/echickle/work/lightcurve",
+  "filter_directory": "/home/echickle/work/ULTRACAM/Filter_Response",
+  "config_directory": "/path/to/config"
+}

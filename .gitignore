@@ -1,6 +1,11 @@
+# Heavy files
+Dark/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.py~
+*~
 *$py.class
 
 # C extensions
