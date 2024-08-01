@@ -1,6 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ULTRACAM',
-    packages=find_packages()
+    name='ULTRACAM_UTILS',
+    packages=find_packages(),
+    package_data={
+        'ULTRACAM_UTILS': ['paths.json'],
+    }
 )
