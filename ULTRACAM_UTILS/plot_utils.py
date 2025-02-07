@@ -1,7 +1,8 @@
 import hipercam as hcam
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+import os, pdb
+from ULTRACAM_UTILS.data_utils import extract_lc
 
 def plot_aper(logfile, redfile, apefile, ccdfile, targ=1, output_dir='./',
               data_dir='./', ra=None, dec=None):
@@ -34,13 +35,15 @@ def plot_aper(logfile, redfile, apefile, ccdfile, targ=1, output_dir='./',
         ypad = (side - yrng)/2
         ax[i].set_xlim([np.min(xaper)-xpad, np.max(xaper)+xpad])
         ax[i].set_ylim([np.min(yaper)-ypad, np.max(yaper)+ypad])
-        hcam.mpl.pCcd(ax[i], mccd[ccd])
+        hcam.mpl.pCcd(ax[i], mccd[ccd], cmap='viridis')
         hcam.mpl.pCcdAper(ax[i], hap[ccd])
+
+    os.makedirs(output_dir, exist_ok=True)
     plt.tight_layout()
     fname = output_dir+'ape_'+apefile[:-4]+'_field.png'
     plt.savefig(fname, dpi=300)
     print('Saved '+fname)
-
+    plt.close()
     
     fig, ax = plt.subplots(ncols=3, figsize=(10,5))
     for i, ccd in enumerate(ccd_list):
@@ -76,6 +79,7 @@ def plot_aper(logfile, redfile, apefile, ccdfile, targ=1, output_dir='./',
     fname = output_dir+'ape_'+logfile[:-4]+'_targ.png'
     plt.savefig(fname, dpi=300)
     print('Saved '+fname)
+    plt.close()
 
     for comp in comp_list:
         fig, ax = plt.subplots(ncols=2, nrows=3, figsize=(10,8), gridspec_kw={'width_ratios': [1,3]})
@@ -110,3 +114,4 @@ def plot_aper(logfile, redfile, apefile, ccdfile, targ=1, output_dir='./',
         fname = output_dir+'ape_'+logfile[:-4]+'_comp{}.png'.format(comp)
         plt.savefig(fname, dpi=300)
         print('Saved '+fname)
+        plt.close()
